@@ -28,7 +28,8 @@ subscriber.pyは認識結果の表示と音声認識再開のテスト用のコ�
 roslaunch yes_no_recognition yes_no_recognition.launch
 ```
 
-* Julius(英語版)を音声認識に使う場合  
+* Julius(英語版)を音声認識に使う場合
+
 `/yes_no_recognition/src/dictionary/yes_no_julius.dict`を単語辞書にしてモジュールモードでJuliusを起動する。
 
 ```
