@@ -1,0 +1,4 @@
+<launch>
+  <node name="subscriber" pkg="yes_no_recognition" type="subscriber.py" output="screen" />
+  <node name="recognition" pkg="yes_no_recognition" type="recognition.py" output="screen" />
+</launch>
