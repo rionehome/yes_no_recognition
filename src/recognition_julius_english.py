@@ -32,6 +32,7 @@ class Recognition:
 
 			if ("<RECOGOUT>" in text) and ("</RECOGOUT>" in text):
 				self.client.send("PAUSE\n")
+				print('== STOP RECOGNITION ==')
 				text_list = text.split("    ")
 				data2 = ""
 				for j in text_list:
@@ -45,25 +46,27 @@ class Recognition:
 				data2 = data2.replace("</s>", "")
 				data2 = data2.strip()
 				self.pub.publish(data2)
-				self.speech_recognition = False
 
 	# 音声認識再開のメッセージを受け取る
 	def control(self, data):
-		self.client.send("RESUME\n")
-		print('== START RECOGNITION ==')
+		if data.data == True:
+			self.client.send("RESUME\n")
+			print('== START RECOGNITION ==')
+		if data.data == False:
+			self.cliant("PAUSE\n")
+			print('== STOP RECOGNITION ==')
 
 	def __init__(self):
 		rospy.init_node('recognition_julius_english', anonymous=True)
 		rospy.Subscriber('recognition_start', Bool, self.control) # 音声認識開始の合図
 		self.pub = rospy.Publisher('recognition_result', String, queue_size=10) # 音声認識結果
-		self.speech_recognition = False # 音声認識のスタートとストップ
 
 		HOST = "localhost"
 		PORT = 10500
 		self.client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 		self.client.connect((HOST,PORT))
-		self.client.send("PAUSE\n")
-		print('== STOP RECOGNITION ==')
+		self.client.send("PAUSE\n") ## # ノードを立ち上げた時から音声認識を始めないときに使う
+		print('== STOP RECOGNITION ==') ##
 		self.recognition()
 
 if __name__ == '__main__':

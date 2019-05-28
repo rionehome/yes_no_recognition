@@ -52,7 +52,6 @@ class Recognition:
 		# 絶対パス
 		self.model_path = '/usr/local/lib/python2.7/dist-packages/pocketsphinx/model' # 音響モデル
 		self.dictionary_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dictionary') # 辞書
-
 		self.speech_recognition = False # 音声認識のスタートとストップ
 		self.recognition()
 
