@@ -14,21 +14,25 @@
 
 【Julius(英語版)】  
 https://sourceforge.net/projects/juliusmodels/files/  
-このサイトのENVR-v5.4.Dnn.Bin.zipをダウンロードして展開する  
+このサイトのENVR-v5.4.Dnn.Bin.zipをダウンロードして展開する。  
 
 ## Description
-recognition.pyは**PocketSphinx**での音声認識のコードです。  
-recognition_english_julius.pyは**Julius**(英語版)での音声認識のコードです。  
-subscriber.pyは認識結果の表示と音声認識再開のテスト用のコードです。  
+* recognition.py：　**PocketSphinx**での音声認識のコードです。
+
+* recognition_english_julius.py：　**Julius**(英語版)での音声認識のコードです。
+
+* subscriber.py：　認識結果の表示と音声認識再開のテスト用のコードです。
+
+* `/yes_no_recognition/src/dictionary/`:　単語辞書と文法辞書があります。
 
 ## Usage
-* PockeSphinxを音声認識に使う場合
+* PockeSphinx
 
 ```
 roslaunch yes_no_recognition yes_no_recognition.launch
 ```
 
-* Julius(英語版)を音声認識に使う場合
+* Julius(英語版)
 
 `/yes_no_recognition/src/dictionary/yes_no_julius.dict`を単語辞書にしてモジュールモードでJuliusを起動する。
 
@@ -36,7 +40,7 @@ roslaunch yes_no_recognition yes_no_recognition.launch
 roslaunch yes_no_recognition yes_no_recognition_julius_english.launch
 ````
 
-* 上のどちらかのコマンドを実行し、`recognition_start`にBool型のメッセージ(True)を投げると音声認識が開始する。
+* 上のどちらかのコマンドを実行し、メッセージ名`recognition_start`にBool型のメッセージ(True)を投げると音声認識が開始する。
 
 ## Node
 **`name` recognition**
@@ -45,10 +49,10 @@ roslaunch yes_no_recognition yes_no_recognition_julius_english.launch
 
 ### Subscribe Topic
 
-* **`recognition_start`** 音声認識開始と停止の受け取り（ std_msgs/Bool ）
+* **`recognition_start`** 音声認識開始と停止の受け取り （ std_msgs/Bool ）
 
-True：音声認識　開始  
-False:音声認識　停止
+	True：音声認識　開始  
+	False:音声認識　停止
 
 ### Publish Topic
 
@@ -58,11 +62,11 @@ False:音声認識　停止
 **`name` subscriber**
 
 ### Subscribe Topic
-* **`recognition_result`** 音声認識結果の受け取り（ std_msgs/String ）
+* **`recognition_result`** 音声認識結果の受け取り （ std_msgs/String ）
 
 ### Publish Topic
 * **`recognition_start`** 音声認識再開 ( std_msgs/Bool )
 
-True：音声認識　開始  
-False:音声認識　停止
+	True：音声認識　開始  
+	False:音声認識　停止
 

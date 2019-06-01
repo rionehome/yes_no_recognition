@@ -17,33 +17,34 @@ class Recognition:
 				self.pause()
 				while self.speech_recognition != True:
 					pass
+
 	# 音声認識
 	def resume(self):
 		print('== START RECOGNITION ==')
 		speech = LiveSpeech(
 		verbose=False, sampling_rate=8000, buffer_size=2048, no_search=False, full_utt=False,
 		hmm=os.path.join(self.model_path, 'en-us'),
-		lm=os.path.join(self.model_path, 'en-us.lm.bin'),
-		dic=os.path.join(self.dictionary_path, 'yes_no_sphinx.dict')
+		lm=False,
+		dic=os.path.join(self.dictionary_path, 'yes_no_sphinx.dict'),
+		jsgf=(os.path.join(self.dictionary_path, "yes_no_sphinx.gram"))
 		)
 		for text in speech:
-			text = str(text)
-			self.pub.publish(text) # 音声認識の結果をpublish
-			break
-# 音声認識ストップ
+			score = text.confidence()
+			if score > 0.1:
+				text = str(text)
+				self.pub.publish(text) # 音声認識の結果をpublish
+				break
+			else:
+				print("**noise**")
+
+	# 音声認識ストップ
 	def pause(self):
 		print('== STOP RECOGNITION ==')
-		speech = LiveSpeech(
-		verbose=False, sampling_rate=8000, buffer_size=2048, no_search=True, full_utt=False,
-		hmm=os.path.join(self.model_path, 'en-us'),
-		lm=os.path.join(self.model_path, 'en-us.lm.bin'),
-		dic=os.path.join(self.dictionary_path, 'yes_no_sphinx.dict')
-		)
+		speech = LiveSpeech(no_search=True)
 
 	# 音声認識開始のメッセージを受け取る
 	def control(self, data):
 		self.speech_recognition = data.data
-
 
 	def __init__(self):
 		rospy.init_node('recognition', anonymous=True)
