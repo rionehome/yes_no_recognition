@@ -49,23 +49,23 @@ roslaunch yes_no_recognition yes_no_recognition_julius_english.launch
 
 ### Subscribe Topic
 
-* **`recognition_start`** 音声認識開始と停止の受け取り （ std_msgs/Bool ）
+* **`yes_no/recognition_start`** 音声認識開始と停止の受け取り （ std_msgs/Bool ）
 
 	True：音声認識　開始  
 	False:音声認識　停止
 
 ### Publish Topic
 
-* **`recognition_result`** 音声認識結果 ( std_msgs/String )
+* **`yes_no/recognition_result`** 音声認識結果 ( std_msgs/String )
 
 ## Node
 **`name` subscriber**
 
 ### Subscribe Topic
-* **`recognition_result`** 音声認識結果の受け取り （ std_msgs/String ）
+* **`yes_no/recognition_result`** 音声認識結果の受け取り （ std_msgs/String ）
 
 ### Publish Topic
-* **`recognition_start`** 音声認識再開 ( std_msgs/Bool )
+* **`yes_no/recognition_start`** 音声認識再開 ( std_msgs/Bool )
 
 	True：音声認識　開始  
 	False:音声認識　停止
